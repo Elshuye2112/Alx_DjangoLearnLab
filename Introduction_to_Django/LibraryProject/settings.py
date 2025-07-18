@@ -37,14 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-<<<<<<< HEAD
     'bookshelf',
-=======
->>>>>>> 03e69fc (Initial commit: Django project inside Introduction_to_Django)
-=======
-    'bookshelf',
->>>>>>> 08a2d9d (Add bookshelf app with Book model and documented CRUD operations)
+
 ]
 
 MIDDLEWARE = [
