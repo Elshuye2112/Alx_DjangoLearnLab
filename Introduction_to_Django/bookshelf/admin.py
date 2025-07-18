@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import Book
 
 @admin.register(Book)
@@ -9,3 +10,7 @@ class BookAdmin(admin.ModelAdmin):
 
 # Alternative registration without decorator:
 # admin.site.register(Book, BookAdmin)
+=======
+
+# Register your models here.
+>>>>>>> 08a2d9d (Add bookshelf app with Book model and documented CRUD operations)
