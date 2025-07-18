@@ -42,3 +42,6 @@ if __name__ == "__main__":
     query_books_by_author("George Orwell")
     query_books_in_library("Central Library")
     query_librarian_for_library("Central Library")
+    query_books_by_author("Elshaday Basie")
+    query_books_in_library("Addis Ababa ")
+    query_librarian_for_library("Bahir Dar")
