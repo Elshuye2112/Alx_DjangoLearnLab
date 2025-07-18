@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render
 
@@ -24,3 +25,8 @@ def librarian_view(request):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> fea6b56 (django modeles created)
