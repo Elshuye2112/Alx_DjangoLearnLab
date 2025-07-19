@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic.detail import DetailView
-from .models import Library
+from .models import Library, Book
 
 # Role check functions
 def is_admin(user):
@@ -37,7 +37,7 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect('admin_view')  # Adjust redirect based on role if needed
+            return redirect('admin_view')  # or redirect based on role
     else:
         form = AuthenticationForm()
     return render(request, 'relationship_app/login.html', {'form': form})
@@ -52,33 +52,18 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('admin_view')  # Adjust redirect based on role if needed
+            return redirect('admin_view')  # or redirect based on role
     else:
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
 
-from django.shortcuts import render
-from .models import Book
-
+# Library book listing
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
 
-
-
+# Library detail view
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')  # or wherever you want after registration
-    else:
-        form = UserCreationForm()
-    return render(request, 'relationship_app/register.html', {'form': form})
