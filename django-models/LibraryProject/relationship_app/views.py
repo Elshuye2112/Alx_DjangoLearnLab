@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.generic import DetailView
+from .models import Library
 
 # Role check functions
 def is_admin(user):
@@ -62,8 +64,7 @@ def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
 
-from django.views.generic import DetailView
-from .models import Library
+
 
 class LibraryDetailView(DetailView):
     model = Library
