@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.urls import include, path
 
 
@@ -27,8 +28,18 @@ path('relationship_app/', include('relationship_app.urls')),
 
 =======
 from django.urls import path
+=======
+from django.urls import include, path
+
+>>>>>>> f4cc49a (authentication added)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+path('relationship_app/', include('relationship_app.urls')),
+
 ]
+<<<<<<< HEAD
 >>>>>>> fea6b56 (django modeles created)
+=======
+
+>>>>>>> f4cc49a (authentication added)
