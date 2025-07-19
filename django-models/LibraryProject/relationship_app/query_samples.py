@@ -1,6 +1,6 @@
 import os
 import django
-
+from relationship_app.models import Author, Book
 # Setup Django environment for standalone script
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LibraryProject.settings')  # Adjust if your settings module name differs
 django.setup()
@@ -42,4 +42,16 @@ if __name__ == "__main__":
     query_books_by_author("George Orwell")
     query_books_in_library("Central Library")
     query_librarian_for_library("Central Library")
+
+
+
+# Example: Query all books by a specific author
+def get_books_by_author(author_name):
+    try:
+        author = Author.objects.get(name=author_name)
+        books = Book.objects.filter(author=author)
+        return books
+    except Author.DoesNotExist:
+        return []
+
 
