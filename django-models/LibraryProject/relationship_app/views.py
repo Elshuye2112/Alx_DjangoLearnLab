@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.views.generic.detail import DetailView
 from .models import Library, Book
-from .forms import BookForm  # make sure this exists
 from django.contrib.auth.decorators import permission_required
 # Role check functions
 def is_admin(user):
