@@ -8,7 +8,8 @@ DEBUG = False  # Turn off in production
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'yourdomain.com']  # Replace with actual domain
 # Enforce HTTPS redirect: all HTTP requests are redirected to HTTPS
 SECURE_SSL_REDIRECT = True
-
+# Tell Django to trust the X-Forwarded-Proto header from your proxy/load balancer
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # HTTP Strict Transport Security (HSTS) settings:
 # Tell browsers to only use HTTPS for the next 1 year (31536000 seconds)
 SECURE_HSTS_SECONDS = 31536000  # 1 year
