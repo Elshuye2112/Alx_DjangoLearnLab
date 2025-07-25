@@ -6,6 +6,33 @@ SECRET_KEY = 'django-insecure-$i@l54*dd53qe&hxz35yn#39**np)%i6nkb%52a75x#bl2av8$
 
 DEBUG = False  # Turn off in production
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'yourdomain.com']  # Replace with actual domain
+# Enforce HTTPS redirect: all HTTP requests are redirected to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS) settings:
+# Tell browsers to only use HTTPS for the next 1 year (31536000 seconds)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+
+# Apply HSTS to all subdomains
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# Allow your domain to be included in browser preload lists for HSTS
+SECURE_HSTS_PRELOAD = True
+
+# Ensure session cookies are only sent over HTTPS connections
+SESSION_COOKIE_SECURE = True
+
+# Ensure CSRF cookies are only sent over HTTPS connections
+CSRF_COOKIE_SECURE = True
+
+# Protect against clickjacking attacks by denying framing
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent browsers from MIME-sniffing responses away from the declared content type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable the browser’s XSS filter to prevent some cross-site scripting attacks
+SECURE_BROWSER_XSS_FILTER = True
 
 # Application definition
 INSTALLED_APPS = [
