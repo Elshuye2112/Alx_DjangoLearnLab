@@ -34,7 +34,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Enable the browser’s XSS filter to prevent some cross-site scripting attacks
 SECURE_BROWSER_XSS_FILTER = True
-
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'bookshelf',
     'relationship_app',
     'users',
-    'csp',  # Content Security Policy
+    'csp',  
 ]
 
 MIDDLEWARE = [
@@ -121,3 +121,6 @@ CONTENT_SECURITY_POLICY = {
         'style-src': ("'self'", 'https://fonts.googleapis.com'),
     }
 }
+
+from django.apps import apps
+print(apps.get_model('users', 'CustomUser'))
