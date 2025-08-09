@@ -25,6 +25,8 @@ class Book(models.Model):
         on_delete=models.CASCADE,
         related_name='books'
     )
+    isbn = models.CharField(max_length=13, unique=True,default="0000000000000")
 
     def __str__(self):
         return f"{self.title} ({self.publication_year})"
+
