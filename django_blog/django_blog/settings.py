@@ -75,8 +75,15 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'NAME': 'django_blog_db',     # the database you created
+        'USER': 'sa',
+        'PASSWORD': 'zxc@123',
+        'HOST': 'DESKTOP-BN9DONJ',
+        'PORT': '1433',               # default SQL Server port
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',  # check your installed ODBC driver
+        },
     }
 }
 
