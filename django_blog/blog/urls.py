@@ -1,6 +1,6 @@
 # blog/urls.py
 from django.urls import path
-from .views import CommentCreateView, CommentDeleteView, CommentUpdateView, PostCreateView, PostDeleteView, PostDetailView, PostListView, PostUpdateView,register_view, login_view, logout_view, profile_view
+from .views import CommentCreateView, CommentDeleteView, CommentUpdateView, PostCreateView, PostDeleteView, PostDetailView, PostListView, PostSearchView, PostUpdateView,register_view, login_view, logout_view, profile_view
 
 urlpatterns = [
     # Authentication URLs
@@ -19,4 +19,7 @@ urlpatterns = [
     path('post/<int:pk>/comments/new/', CommentCreateView.as_view(), name='add-comment'),
     path('comment/<int:pk>/update/', CommentUpdateView.as_view(), name='edit-comment'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
+
+    path('search/', PostSearchView.as_view(), name='post-search'),
+    path('tags/<slug:tag_slug>/', PostListView.as_view(), name='posts-by-tag'),
 ]

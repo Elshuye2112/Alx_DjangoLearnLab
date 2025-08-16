@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
-
+from django.db.models import Q
 from blog.models import Comment, Post
 from .forms import CommentForm, CustomUserCreationForm, PostForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -54,12 +54,21 @@ def profile_view(request):
             messages.success(request, "Profile updated successfully.")
     return render(request, 'blog/profile.html')
 # List all posts
+# class PostListView(ListView):
+#     model = Post
+#     template_name = 'blog/post_list.html'
+#     context_object_name = 'posts'
+#     ordering = ['-published_date']
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
     ordering = ['-published_date']
-
+    def get_queryset(self):
+        tag_slug = self.kwargs.get('tag_slug')
+        if tag_slug:
+            return Post.objects.filter(tags__slug=tag_slug)
+        return Post.objects.all()
 # View post details
 class PostDetailView(DetailView):
     model = Post
@@ -168,3 +177,17 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('post-detail', kwargs={'pk': self.get_object().post.pk})
+class PostSearchView(ListView):
+    model = Post
+    template_name = 'blog/search_results.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Post.objects.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query)
+            ).distinct()
+        return Post.objects.none()

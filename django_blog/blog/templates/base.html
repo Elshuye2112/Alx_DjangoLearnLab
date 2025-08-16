@@ -23,7 +23,10 @@
 
     <main>
         {% block content %}
-        <!-- Page-specific content goes here -->
+<form method="get" action="{% url 'post-search' %}">
+    <input type="text" name="q" placeholder="Search posts..." required>
+    <button type="submit">Search</button>
+</form>
         {% endblock %}
     </main>
 
