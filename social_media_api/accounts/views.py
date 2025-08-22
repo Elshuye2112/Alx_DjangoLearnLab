@@ -10,11 +10,12 @@ from posts.serializers import CommentSerializer, PostSerializer
 from .serializers import PublicUserSerializer, RegisterSerializer, UserSerializer
 from rest_framework.views import APIView
 from django.db.models import Q
+from .models import CustomUser
 
 User = get_user_model()
 
 class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
 
 class LoginView(generics.GenericAPIView):
