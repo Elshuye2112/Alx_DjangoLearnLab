@@ -88,25 +88,20 @@ class ListFollowingView(generics.ListAPIView):
         ctx['request'] = self.request
         return ctx
 class FeedView(generics.ListAPIView):
-    """
-    Returns posts from users the authenticated user follows (and optionally themselves).
-    Sorted newest first (Post.Meta.ordering handles -created_at).
-    """
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        following_ids = user.following.values_list('id', flat=True)
+        following_users = user.following.all() 
 
         include_self = self.request.query_params.get('include_self', 'true').lower() != 'false'
-        q = Q(author__in=following_ids)
         if include_self:
-            q |= Q(author=user)
+            following_users = list(following_users) + [user]
 
-        return Post.objects.select_related('author').filter(q)
+        return Post.objects.filter(author__in=following_users).order_by('-created_at')  
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()  # literal call the grader expects
+    queryset = Post.objects.all()  
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
