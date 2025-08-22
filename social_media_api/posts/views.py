@@ -10,7 +10,7 @@ from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsAuthorOrReadOnly
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.select_related('author').all()
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -21,7 +21,7 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.select_related('author', 'post').all()
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     filter_backends = [filters.OrderingFilter]
