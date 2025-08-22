@@ -38,7 +38,8 @@ class PublicUserSerializer(serializers.ModelSerializer):
         return request.user.following.filter(id=obj.id).exists()
 
 class UserSerializer(serializers.ModelSerializer):
+    dummy = serializers.CharField(write_only=True,required=False) 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'bio', 'profile_picture']
+        fields = ['id', 'username', 'email', 'bio', 'profile_picture','dummy']
 
