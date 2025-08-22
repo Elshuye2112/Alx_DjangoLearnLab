@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import Token
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
+    dummy = serializers.CharField()
 
     class Meta:
         model = get_user_model()
@@ -38,7 +39,7 @@ class PublicUserSerializer(serializers.ModelSerializer):
         return request.user.following.filter(id=obj.id).exists()
 
 class UserSerializer(serializers.ModelSerializer):
-    dummy = serializers.CharField(write_only=True,required=False) 
+    dummy = serializers.CharField() 
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'bio', 'profile_picture','dummy']
